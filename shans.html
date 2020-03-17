@@ -1,0 +1,132 @@
+<html>
+	<head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  <title>Мій вибір</title>
+	  <link rel="stylesheet" href="style.css">
+	  <script>
+		function GetTable() {
+			var gorod = document.getElementById("city").value;
+			var sp = document.getElementById("spec").value;
+			
+		   var app = "https://script.googleusercontent.com/macros/echo?user_content_key=iT7xDNUK0pAbJASzFV4jQ7dT3doqlpaJhmbNHire3kFKpYxp4wU1GjBP89kSICF4YH97N3AFo6WHIBPySTmjHLC6gWuxE10-m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnHfduFRQfIfXTaOiAuvH-oWFIySJonVrEvABV1tIT4Mu0XbnPIcVLhokgy-ScaD2_NCau19DVJac&lib=MeSao8dkO1hQtTlXzZPsez8Lvz31w0cnn",
+			  output = '<table border="1"><tr><th>№ пункта</th><th>Місце знаходження </th><th>Назва навчального закладу</th><th>Спеціальність</th><th>Факультет</th><th>Освітня програма</th><th>Середній бал зно зарахованих на бюджет</th><th>Середній бал зно зарахованих на контракт</th><th>Конкурс на бюджетне місце</th></tr>',
+			  xhr = new XMLHttpRequest();
+		   xhr.open('GET', app);
+		   xhr.onreadystatechange = function() {
+			 if (xhr.readyState !== 4) return;
+
+			 if (xhr.status == 200) {
+				try {
+					var r = JSON.parse(xhr.responseText),
+					   result = r["result"];
+					for (var i = 0; i < result.length; i++){
+						if (r["result"][i][0] == gorod && r["result"][i][2] == sp){
+						output += "<tr><td>" + (i+1) + "</td>";
+						for(var j = 0; j < 8; j++){
+						  var obj = r["result"][i][j];
+						  output += "<td>" + obj + "</td>";
+						}
+						output += "</tr>";
+					}
+					}
+					output += "</table>";
+				} catch(e) {}
+			 } 
+			 
+		   document.getElementById('info').innerHTML = output;
+		   	document.getElementById('check').style.display = "block";
+		   document.getElementById('content').style.height = "auto";
+		   }
+		   xhr.send()
+		}
+		function Clear(){
+			document.getElementById("city").value = " ";
+			document.getElementById("spec").value = " ";
+		}
+		function CheckChance(){
+			var szno = document.getElementById("srzno").value;
+			var nomer = document.getElementById("nomerPunkta").value;
+			var korb = document.getElementById("kontrBudj").value;
+			var balzno;
+			var out;
+			 var app = "https://script.googleusercontent.com/macros/echo?user_content_key=iT7xDNUK0pAbJASzFV4jQ7dT3doqlpaJhmbNHire3kFKpYxp4wU1GjBP89kSICF4YH97N3AFo6WHIBPySTmjHLC6gWuxE10-m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnHfduFRQfIfXTaOiAuvH-oWFIySJonVrEvABV1tIT4Mu0XbnPIcVLhokgy-ScaD2_NCau19DVJac&lib=MeSao8dkO1hQtTlXzZPsez8Lvz31w0cnn",
+			  output = '<table border="1"><tr><th>№ пункта</th><th>Місце знаходження </th><th>Назва навчального закладу</th><th>Спеціальність</th><th>Факультет</th><th>Освітня програма</th><th>Середній бал зно зарахованих на бюджет</th><th>Середній бал зно зарахованих на контракт</th><th>Конкурс на бюджетне місце</th></tr>',
+			  xhr = new XMLHttpRequest();
+		   xhr.open('GET', app);
+		   xhr.onreadystatechange = function() {
+			 if (xhr.readyState !== 4) return;
+			 if (xhr.status == 200) {
+				try {
+					var r = JSON.parse(xhr.responseText),
+					result = r["result"];
+					if (korb == "b"){
+						balzno = r["result"][nomer-1][5];
+						}
+					else if(korb == "k"){
+						balzno = r["result"][nomer-1][5];
+					}
+			 } catch(e) {}
+			 out = "Ваш шанс поступления  =  " + ((szno / balzno)*100) + " %";
+			 document.getElementById('rezultat').innerHTML = out;
+		   document.getElementById('content').style.height = "auto";
+		   }
+		   }
+		   xhr.send()
+		}
+	</script>
+	 </head>
+	 <body>
+	  <div id="container">
+	  <div id="header">
+	   <img src="books.png" alt="Помічник Абітурієнта" id="logo">
+	   Мій вибір
+	   </div>
+	   <div id="sidebar">
+		<h3>МЕНЮ:</h3>
+		<p><a href="index.html" class="punkt">Головна</a></p>
+		<p><a href="start.html" class="punkt">Вибір вищого закладу</a></p>
+		<p><a href="shans.html" class="punkt">Оцінити свій шанс</a></p>
+	   </div>
+	   <div id="content">
+		<div class="opros">
+		<div id="first">
+		<p><span style="margin-top:30px">Оберіть місце знаходження закладу:</span>
+		<select id="city" class="vibor">
+		  <option disabled selected></option>
+		  <option value="Київ">Київ</option>
+		  <option value="Харків" >Харків</option> 
+		  <option value="Одеса">Одеса</option>
+		 </select>
+		 </p>
+		 <p>Оберіть спеціальність: 
+		<select id="spec" class="vibor" style="margin-left:256px">
+		  <option disabled selected></option>
+		  <option value="122 Комп'ютерні науки">122 - Компьютерні науки</option>
+		  <option value="125 Кібербезпека" >125 - Кібербезпека</option> 
+		  <option value="126 Інформаційні системи та технології">126 - Інформаційні системи та технології</option>
+		</select>
+		</p>
+		<p><input type="reset" value="Сброс" onclick="Clear()"><input type="button" value="Поиск подходящих вузов" style="margin-left:15px; margin-bottom:10px" onclick="GetTable()"></p>
+		</div>
+		<p id="check">Введите номер пункта из таблицы: <input type="text" id="nomerPunkta" class="pole" style="margin-left:112px"></br></br>
+		Ваш средний бал ЗНО: <input type="text" id="srzno" class="pole" style="margin-left:256px"></br></br>
+		Контракт чи бюджет: <select id="kontrBudj" class="vibor" style="margin-left:275px">
+		  <option disabled selected></option>
+		  <option value="k">Контракт</option>
+		  <option value="b" >Бюджет</option> 
+		</select></br></br>
+		<input type="button" value="Оцінити свій шанс!" style="margin-left:0px; margin-bottom:10px" onclick="CheckChance()">
+		</p>
+		</div>
+		<div id="rezultat">
+		
+		</div>
+		<div id="info">
+			
+		</div>
+	   </div>
+	   <div id="footer"> Жеребной Виктор</div>
+	  </div> 
+	 </body>
+</html>
+

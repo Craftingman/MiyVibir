@@ -1,0 +1,88 @@
+body {
+		font: 10pt Arial, Helvetica, serif; /* Шрифт на веб-странице */
+		background: #B0E0E6; /* Цвет фона */
+	   }
+	   h2 {
+		font-size: 1.3em; /* Размер шрифта */
+		color: #191970; /* Цвет текста */
+		margin-top: 0; /* Отступ сверху */
+	   }
+	   #container {
+		width: 1200px; /* Ширина слоя */
+		margin: 0 auto; /* Выравнивание по центру */
+		background: #f0f0f0; /* Цвет фона левой колонки */
+	   }
+	   #header {
+		font-family: serif;
+		font-size: 4em; /* Размер текста */
+		text-align: left; /* Выравнивание по центру */
+		padding: 5px;
+		padding-left: 15px; /* Отступы вокруг текста */
+		background: #4682B4; /* Цвет фона шапки */
+		color: #ffe; /* Цвет текста */
+	   }
+	   #sidebar {
+		font-family: serif;
+		font-size: 1.5em;
+		margin-top: 10px; 
+		width: 110px; /* Ширина слоя */
+		height: 100%;
+		padding: 0 10px; /* Отступы вокруг текста */
+		float: left; /* Обтекание по правому краю */
+	   }
+	   #content {
+		height: 100%;
+		font-family: serif;
+		font-size: 1.5em;
+		margin-left: 200px; /* Отступ слева */
+		padding: 10px; /* Поля вокруг текста */
+		background: #fff; /* Цвет фона правой колонки */
+	   }
+	   #footer {
+		background: #4682B4; /* Цвет фона подвала */
+		color: #fff; /* Цвет текста */
+		padding: 5px; /* Отступы вокруг текста */
+		padding-left: 15px;
+		
+	   }
+	   .punkt {
+		text-decoration: none;
+		color: #191970;
+		font-weight: bold;
+	   }
+	   .punkt:hover {
+		color: #800000;
+	   }
+	   #logo{
+		width: 60px;
+		margin-bottom: -10px;
+		margin-top: 5px;
+	   }
+	   .opros {
+		padding-left: 15px;
+		margin: 20px;
+		background-color: #ADD8E6;
+		color: #191970;
+		font-weight: bold;
+		font-size: 1.3em;
+	   }
+	   .vibor {
+		   margin-left: 100px;
+		   width: 200px;
+	   }
+	   .pole {
+		   margin-left: 100px;
+		   width: 200px;
+	   }
+	   #check {
+		   display: none;
+	   }
+	   
+	   #rezultat {
+			padding-left: 15px;
+			margin: 20px;
+			background-color: #ADD8E6;
+			color: #191970;
+			font-weight: bold;
+			font-size: 1.3em;
+	   }
